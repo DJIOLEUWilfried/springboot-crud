@@ -33,8 +33,44 @@ public class PersonController {
 
         Optional<Person> per = personRepository.findById(id);
 
-        return per.map(person -> new ResponseEntity<>(person, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return per.map(
+                person -> new ResponseEntity<>(person, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Person> updatePersonController(@PathVariable Long id, @RequestBody Person updatePerson) {
+
+        Optional<Person> per = personRepository.findById(id);
+
+        if (per.isPresent())
+        {
+            Person perIsPresent = per.get();
+
+            perIsPresent.setCity(updatePerson.getCity());
+            perIsPresent.setName(updatePerson.getName());
+            perIsPresent.setPhoneNumber(updatePerson.getPhoneNumber());
+
+            return new ResponseEntity<>(personRepository.save(perIsPresent), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>( HttpStatus.NOT_FOUND );
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Person> deletePersonController(@PathVariable Long id) {
+
+        Optional<Person> per = personRepository.findById(id);
+
+        if (per.isPresent()){
+
+            personRepository.deleteById(id);
+
+            return new ResponseEntity<>(HttpStatus.OK) ;
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND) ;
+    }
 
 }
