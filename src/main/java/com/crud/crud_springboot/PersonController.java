@@ -17,14 +17,15 @@ public class PersonController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Person>> getAllPerson() {
+    public ResponseEntity<List<Person>> getAllPersonController() {
         return new ResponseEntity<>(personRepository.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Person> createPerson(@RequestBody Person person) {
+    public ResponseEntity<Person> createPersonController(@RequestBody Person person) {
 
         return new ResponseEntity<>(personRepository.save(person), HttpStatus.CREATED) ;
     }
+
 
 }
