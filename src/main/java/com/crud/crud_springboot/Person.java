@@ -14,14 +14,14 @@ public class Person {
 
     private String city;
 
-    private String phoneNumber;
+    private long phoneNumber;
 
 
-    public String getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
